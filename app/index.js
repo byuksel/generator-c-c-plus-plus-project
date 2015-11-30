@@ -35,16 +35,16 @@ exports = module.exports = generators.Base.extend({
   },
   deriveAnswers: function() {
     this.answers['generatorModuleClass'] = us.classify(this.answers['generatorModuleName']);
-    this.answers['generatorModuleNameWithDashes'] = us(
-      this.answers['generatorModuleName']).decapitalize().dasherize().value();
+    this.answers['generatorModuleNameWithUnderscores'] = us(
+      this.answers['generatorModuleName']).decapitalize().underscored().value();
 
   },
   askModuleWebsite: function() {
     var done = this.async();
     var prompts = [ {
-      name: 'generatorModuleNameWithDashes',
-      message: 'What is your module\'s dasherized name ? Will use this as the main module name:',
-      default : this.answers['generatorModuleNameWithDashes'],
+      name: 'generatorModuleNameWithUnderscores',
+      message: 'What is your module\'s underscored name ? Will use this as the main module name:',
+      default : this.answers['generatorModuleNameWithUnderscores'],
       desc: 'Main exported class from entry file.'
     }, {
       name: 'generatorModuleDescription',
@@ -90,7 +90,7 @@ exports = module.exports = generators.Base.extend({
     this._copyToDestWithTemplate('_README.md', 'README.md', this.answers);
     // src dir
     this._copyToDestWithTemplate('_src/_Makefile.am', 'src/Makefile.am', this.answers);
-    this._copyToDest('_src/_main.cpp', 'src/' + this.answers['generatorModuleNameWithDashes'] + '.cpp');
+    this._copyToDest('_src/_main.cpp', 'src/' + this.answers['generatorModuleNameWithUnderscores'] + '.cpp');
     this._copyToDest('_src/_helper.cc', 'src/helper.cc');
     this._copyToDest('_src/_helper.cpp', 'src/helper.cpp');
     this._copyToDest('_src/_helper.h', 'src/helper.h');
@@ -102,10 +102,11 @@ exports = module.exports = generators.Base.extend({
 
   },
   finalRound: function() {
-    console.log(chalk.yellow('\nEverything is ready!'));
-    console.log(chalk.yellow('You can type "grunt", and run your unittests, get coverage reports, ' +
-                             'get browserified and minimized versions of your module/library.'));
-    console.log(chalk.cyan('\nFor more information, refer to HOW_TO_GUIDE.md.'));
+    console.log(chalk.yellow('\nEverything is ready!\n'));
+    console.log(chalk.yellow('You can type "aclocal", "autoconf" and "automake --add-missing" to configure your library.'));
+    console.log(chalk.yellow('Next type "./configure", and "make" and voila, your binary ' +
+                             this['generatorModuleNameWithUnderscores'] + ' under src directory'));
+    console.log(chalk.cyan('\nFor more information, refer to README.md.'));
     console.log(chalk.green('\nEnjoy the ride, and have fun coding!'));
   }
 });

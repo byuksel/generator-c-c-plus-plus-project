@@ -4,6 +4,10 @@
 
 Write an awesome description for your new C/C++ project here. You can edit this file and its contents.
 
+## Quick Installation ##
+
+On Mac OS X, in order to install **automake**, **autoconf** and **aclocal**, you can follow the instructions [from this gist](https://gist.github.com/jellybeansoup/4192307):
+
 # Usage ##
 
 In order to make everything work, go the root of project, and type:
