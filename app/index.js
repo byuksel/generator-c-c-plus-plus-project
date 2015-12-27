@@ -3,9 +3,6 @@ var chalk = require('chalk'),
     us = require('underscore.string');
 
 exports = module.exports = generators.Base.extend({
-  _copyToDest: function(from, to) {
-    this.fs.copy(this.templatePath(from), this.destinationPath(to));
-  },
   _makeDestDir: function(dir) {
     var newDir = this.destinationPath(dir);
     if (!this.fs.exists(newDir)) {
@@ -82,23 +79,23 @@ exports = module.exports = generators.Base.extend({
     this._makeDestDir('my_inc');
   },
   copyFiles: function(){
-    this._copyToDest('._gitignore', '.gitignore');
-    this._copyToDestWithTemplate('_configure.ac', 'configure.ac', this.answers);
-    this._copyToDest('_Makefile.am', 'Makefile.am');
-    this._copyToDestWithTemplate('_AUTHORS', 'AUTHORS', this.answers);
-    this._copyToDestWithTemplate('_LICENCE.md', 'LICENCE.md', this.answers);
-    this._copyToDestWithTemplate('_README.md', 'README.md', this.answers);
+    this.copy('_gitignore', '.gitignore');
+    this.template('_configure.ac', 'configure.ac', this.answers);
+    this.copy('_Makefile.am', 'Makefile.am');
+    this.template('_AUTHORS', 'AUTHORS', this.answers);
+    this.template('_LICENCE.md', 'LICENCE.md', this.answers);
+    this.template('_README.md', 'README.md', this.answers);
     // src dir
-    this._copyToDestWithTemplate('_src/_Makefile.am', 'src/Makefile.am', this.answers);
-    this._copyToDest('_src/_main.cpp', 'src/' + this.answers['generatorModuleNameWithUnderscores'] + '.cpp');
-    this._copyToDest('_src/_helper.cc', 'src/helper.cc');
-    this._copyToDest('_src/_helper.cpp', 'src/helper.cpp');
-    this._copyToDest('_src/_helper.h', 'src/helper.h');
+    this.template('_src/_Makefile.am', 'src/Makefile.am', this.answers);
+    this.copy('_src/_main.cpp', 'src/' + this.answers['generatorModuleNameWithUnderscores'] + '.cpp');
+    this.copy('_src/_helper.cc', 'src/helper.cc');
+    this.copy('_src/_helper.cpp', 'src/helper.cpp');
+    this.copy('_src/_helper.h', 'src/helper.h');
 
     // my_inc dir
-    this._copyToDest('_my_inc/_Makefile.am', 'my_inc/Makefile.am');
-    this._copyToDest('_my_inc/_myadd.cpp', 'my_inc/myadd.cpp');
-    this._copyToDest('_my_inc/_myadd.h', 'my_inc/myadd.h');
+    this.copy('_my_inc/_Makefile.am', 'my_inc/Makefile.am');
+    this.copy('_my_inc/_myadd.cpp', 'my_inc/myadd.cpp');
+    this.copy('_my_inc/_myadd.h', 'my_inc/myadd.h');
 
   },
   finalRound: function() {
