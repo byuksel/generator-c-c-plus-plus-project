@@ -6,9 +6,9 @@ This is a template project which I used in the "Automake C++ Tutorial" at http:/
 
 ## Quick Installation
 
-Install `yo`, `grunt-cli`, `bower` and `generator-c-c-plus-plus-project`:
+Install `yo`, and `generator-c-c-plus-plus-project`:
 ```
-npm install -g grunt-cli yo bower generator-c-c-plus-plus-project
+npm install -g yo generator-c-c-plus-plus-project --verbose
 ```
 
 ## Usage
